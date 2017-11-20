@@ -18,6 +18,10 @@ module.exports = (app, url) => {
       items = [];
       res.status(204).send();
     });
+  // // api/priv/items/count
+  app.route(`${url}/count`).get((req, res) => {
+    res.json({ count: items.length });
+  });
   // // api/pub/items/314
   app
     .route(`${url}/:id`)

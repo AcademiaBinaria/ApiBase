@@ -20,6 +20,11 @@ module.exports = (app, url) => {
       items = [];
       res.status(204).send();
     });
+  // // api/priv/operations/count
+  app.route(`${url}/count`).get((req, res) => {
+    const userItems = items.find(i => (i.owner = req.user));
+    res.json({ count: userItems.length });
+  });
   // // api/priv/operations/314
   app
     .route(`${url}/:id`)

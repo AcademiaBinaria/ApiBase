@@ -19,7 +19,8 @@ module.exports.useMiddleware = app => {
   app.use(bodyParser.json());
 
   app.use((req, res, next) => {
-    console.log(`req : ${req.method} - ${req.url}`);
+    let body = JSON.stringify(req.body || "");
+    console.log(`req : ${req.method} - ${req.url} - ${body}`);
     next();
   });
 
