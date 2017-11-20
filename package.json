@@ -1,0 +1,24 @@
+{
+  "name": "api-flow",
+  "version": "1.0.0",
+  "description": "API base para tutoriales",
+  "main": "index.js",
+  "author": {
+    "name": "Alberto Basalo",
+    "url": "https://twitter.com/albertobasalo"
+  },
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/AcademiaBinaria/ApiBase",
+    "type": "git"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0"
+  }
+}
