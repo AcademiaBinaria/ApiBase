@@ -1,15 +1,17 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
-const secret = 'academiabinaria'
+const secret = "http://academia-binaria.com";
+const seconds = 60;
 
-exports.createToken = (user) => jwt.sign(user, secret, { expiresIn: 60 })
+exports.createToken = user => {
+  const token = jwt.sign({ email: user.email }, secret, { expiresIn: seconds });
+  return { token: token };
+};
 
-exports.verifyToken = (token) => {
-    try {
-        return jwt.verify(token, secret)
-    }
-    catch (err) {
-        return false
-    }
-}
-
+exports.verifyToken = token => {
+  try {
+    return jwt.verify(token, secret);
+  } catch (err) {
+    return false;
+  }
+};

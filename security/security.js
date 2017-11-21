@@ -1,5 +1,5 @@
 const jwt = require("./jwt");
-const users = [];
+const users = [{ email: "admin@cash-flow.com", password: "secret" }];
 
 module.exports = {
   useSecurity: useSecurity,
@@ -11,9 +11,9 @@ module.exports = {
 
 function useSecurity(app, url) {
   app.use(url, (req, res, next) => {
-    const token = getToken(req);
-    if (token) {
-      req.user = token.email;
+    const user = getUser(req);
+    if (user) {
+      req.email = user.email;
       next();
     } else {
       res.status(401).send("Invalid credentials");
@@ -21,12 +21,12 @@ function useSecurity(app, url) {
   });
 }
 
-function getToken(req) {
+function getUser(req) {
   const authorization = req.get("Authorization");
   const pieces = authorization.split(" ");
   if (pieces && pieces.length > 0) {
-    const authToken = authorization.split(" ")[1];
-    return jwt.verifyToken(authToken);
+    const token = pieces[1];
+    return jwt.verifyToken(token);
   }
   return null;
 }

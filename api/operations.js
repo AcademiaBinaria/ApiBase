@@ -5,14 +5,14 @@ module.exports = (app, url) => {
   app
     .route(url)
     .get((req, res) => {
-      const userItems = items.find(i => (i.owner = req.user));
+      const userItems = items.find(i => (i.owner = req.email));
       if (userItems && userItems.length > 0) res.json(userItems);
       else res.status(204).send();
     })
     .post((req, res) => {
       const item = req.body;
       item._id = new Date().getTime().toString();
-      item.owner = req.user;
+      item.owner = req.email;
       items.push(item);
       res.status(201).json(item);
     })
@@ -22,19 +22,19 @@ module.exports = (app, url) => {
     });
   // // api/priv/operations/count
   app.route(`${url}/count`).get((req, res) => {
-    const userItems = items.find(i => (i.owner = req.user));
+    const userItems = items.find(i => (i.owner = req.email));
     res.json({ count: userItems.length });
   });
   // // api/priv/operations/314
   app
     .route(`${url}/:id`)
     .get((req, res) => {
-      const index = getIndexByOwnerId(req.user, req.params.id);
+      const index = getIndexByOwnerId(req.email, req.params.id);
       if (index >= 0) res.json(items[index]);
       else res.status(404).send();
     })
     .put((req, res) => {
-      const index = getIndexByOwnerId(req.user, req.params.id);
+      const index = getIndexByOwnerId(req.email, req.params.id);
       if (index >= 0) {
         items[index] = req.body;
         res.json(items[index]);
@@ -43,7 +43,7 @@ module.exports = (app, url) => {
       }
     })
     .delete((req, res) => {
-      const index = getIndexByOwnerId(req.user, req.params.id);
+      const index = getIndexByOwnerId(req.email, req.params.id);
       if (index >= 0) {
         items.splice(index, 1);
         res.status(204).send();
