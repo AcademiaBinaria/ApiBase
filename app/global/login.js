@@ -1,15 +1,18 @@
 const security = require("./../lib/security.js");
+
 module.exports = (app, url) => {
-  app.route(url).post((req, res) => {
-    let credential = req.body;
-    if (security.isValidUser(credential)) {
-      const sessionToken = createSessionToken(credential, res);
-      sendSessionToken(sessionToken, res);
-    } else {
-      sendInvalidTokenMessage(credential, res);
-    }
-  });
+  app.route(url).post((req, res) => login(req, res));
 };
+
+function login(req, res) {
+  let credential = req.body;
+  if (security.isValidUser(credential)) {
+    const sessionToken = createSessionToken(credential, res);
+    sendSessionToken(sessionToken, res);
+  } else {
+    sendInvalidTokenMessage(credential, res);
+  }
+}
 
 function sendInvalidTokenMessage(credential, res) {
   console.log(`Invalid credential: ${JSON.stringify(credential)}`);

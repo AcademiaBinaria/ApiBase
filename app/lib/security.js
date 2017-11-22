@@ -13,22 +13,36 @@ function useSecurity(app, url) {
   app.use(url, (req, res, next) => {
     const user = getUser(req);
     if (user) {
-      req.email = user.email;
+      singRequest(req, user);
       next();
     } else {
-      res.status(401).send("Invalid credentials");
+      sendInvalidCredentialsMessage(res);
     }
   });
 }
 
+function singRequest(req, user) {
+  req.email = user.email;
+}
+
+function sendInvalidCredentialsMessage(res) {
+  res.status(401).send("Invalid credentials");
+}
+
 function getUser(req) {
+  const token = getAuthorizationToken(req);
+  const user = jwt.verifyToken(token);
+  return user;
+}
+
+function getAuthorizationToken(req) {
   const authorization = req.get("Authorization");
-  const pieces = authorization.split(" ");
-  if (pieces && pieces.length > 0) {
-    const token = pieces[1];
-    return jwt.verifyToken(token);
+  const chunks = authorization.split(" ");
+  if (chunks && chunks.length > 0) {
+    return chunks[1];
+  } else {
+    return null;
   }
-  return null;
 }
 
 function checkUsers(user, test) {

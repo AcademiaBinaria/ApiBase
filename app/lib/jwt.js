@@ -2,9 +2,11 @@ const jwt = require("jsonwebtoken");
 
 const secret = "http://academia-binaria.com";
 const seconds = 60 * 60;
+const expiration = { expiresIn: seconds };
 
 exports.createToken = user => {
-  const token = jwt.sign({ email: user.email }, secret, { expiresIn: seconds });
+  const payload = { email: user.email };
+  const token = jwt.sign(payload, secret, expiration);
   return { token: token };
 };
 
