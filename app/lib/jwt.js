@@ -9,9 +9,11 @@ exports.createToken = user => {
 };
 
 exports.verifyToken = token => {
+  let decoded = false;
   try {
-    return jwt.verify(token, secret);
+    decoded = jwt.verify(token, secret);
   } catch (err) {
-    return false;
+    console.warn("Token not verified");
   }
+  return decoded;
 };

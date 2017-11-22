@@ -1,23 +1,27 @@
-const security = require("./../security/security.js");
+const security = require("./../lib/security.js");
 module.exports = (app, url) => {
   app.route(url).post((req, res) => {
     const user = req.body;
     if (security.userExists(user)) {
-      sendInvalidUser(user, res);
+      sendInvalidUserResponse(user, res);
     } else {
-      sendNewToken(user, res);
+      createUser(user);
+      sendTokenForUser(user, res);
     }
   });
 };
 
-function sendNewToken(user, res) {
+function createUser(user, res) {
   console.log(`ok registering: ${user.email}`);
-  security.createUser(user);
+  security.saveUser(user);
+}
+
+function sendTokenForUser(user, res) {
   let token = security.getNewToken(user);
   res.status(201).json(token);
 }
 
-function sendInvalidUser(user, res) {
+function sendInvalidUserResponse(user, res) {
   console.log(`email already registered: ${user.email}`);
   res.status(409).send(`email ${user.email} already registered`);
 }

@@ -4,7 +4,7 @@ const users = [{ email: "admin@cash-flow.com", password: "secret" }];
 module.exports = {
   useSecurity: useSecurity,
   userExists: user => users.some(u => u.email == user.email),
-  createUser: user => users.push(user),
+  saveUser: user => users.push(user),
   isValidUser: user => users.filter(u => checkUsers(user, u))[0],
   getNewToken: user => jwt.createToken(user)
 };
