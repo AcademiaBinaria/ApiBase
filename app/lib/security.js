@@ -11,11 +11,12 @@ module.exports = {
 
 function useSecurity(app, url) {
   app.use(url, (req, res, next) => {
-    const user = getUser(req);
-    if (user) {
+    try {
+      const user = getUser(req);
       singRequest(req, user);
       next();
-    } else {
+    } catch (err) {
+      console.error(err.message);
       sendInvalidCredentialsMessage(res);
     }
   });
@@ -38,11 +39,7 @@ function getUser(req) {
 function getAuthorizationToken(req) {
   const authorization = req.get("Authorization");
   const chunks = authorization.split(" ");
-  if (chunks && chunks.length > 0) {
-    return chunks[1];
-  } else {
-    return null;
-  }
+  return chunks[1];
 }
 
 function checkUsers(user, test) {

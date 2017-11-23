@@ -1,9 +1,4 @@
-/**
- * @param {object} app - express app instance
- * @param {object} express - express framework
- * @return configured app
- */
-module.exports.useMiddleware = app => {
+module.exports.useMiddleware = function(app) {
   const cors = require("cors");
   const bodyParser = require("body-parser");
   const security = require("./security.js");
