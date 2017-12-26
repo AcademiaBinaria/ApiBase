@@ -1,7 +1,5 @@
 const jwt = require("jsonwebtoken");
-
-const secret = "http://academia-binaria.com";
-const SECRET = process.env.SECRET || "secret";
+const SECRET = process.env.SECRET || "http://academia-binaria.com";
 const session_seconds = 60 * 60;
 const expiration = { expiresIn: session_seconds };
 
