@@ -1,5 +1,7 @@
+const EMAIL = process.env.EMAIL || "admin@api-base.com";
+const PASSWORD = process.env.PASSWORD || "1234";
+const users = [{ email: EMAIL, password: PASSWORD }];
 const jwt = require("./jwt");
-const users = [{ email: "admin@cash-flow.com", password: "secret" }];
 
 module.exports = {
   useSecurity: useSecurity,

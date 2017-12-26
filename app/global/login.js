@@ -15,12 +15,12 @@ function login(req, res) {
 }
 
 function sendInvalidTokenMessage(credential, res) {
-  console.log(`Invalid credential: ${JSON.stringify(credential)}`);
+  console.error(`Invalid credential: ${JSON.stringify(credential)}`);
   res.status(404).send("Invalid credential");
 }
 
 function createSessionToken(credential) {
-  console.log(`accepted: ${credential.email}`);
+  console.warn(`accepted: ${credential.email}`);
   return security.getNewToken(credential);
 }
 

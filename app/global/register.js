@@ -14,7 +14,7 @@ function register(req, res) {
 }
 
 function createUser(user, res) {
-  console.log(`ok registering: ${user.email}`);
+  console.warn(`ok registering: ${user.email}`);
   security.saveUser(user);
 }
 
@@ -24,6 +24,6 @@ function sendTokenForUser(user, res) {
 }
 
 function sendInvalidUserResponse(user, res) {
-  console.log(`email already registered: ${user.email}`);
+  console.error(`email already registered: ${user.email}`);
   res.status(409).send(`email ${user.email} already registered`);
 }

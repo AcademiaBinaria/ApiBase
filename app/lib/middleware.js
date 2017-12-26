@@ -5,18 +5,19 @@ module.exports.useMiddleware = function(app) {
   const securedRoutes = "/api/priv/";
 
   app.use(cors());
-
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
-
+  configureBodyParser();
   app.use((req, res, next) => {
     logEveryRequest(req);
     next();
   });
+  security.useSecurity(app, securedRoutes);
+
+  function configureBodyParser() {
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+  }
   function logEveryRequest(req) {
     const body = JSON.stringify(req.body);
     console.log(`${req.method} : ${req.url} - ${body}`);
   }
-
-  security.useSecurity(app, securedRoutes);
 };

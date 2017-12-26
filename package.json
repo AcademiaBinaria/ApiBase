@@ -1,7 +1,7 @@
 {
   "name": "api-flow",
   "version": "1.0.0",
-  "description": "API base para tutoriales",
+  "description": "API base tutorial",
   "main": "index.js",
   "author": {
     "name": "Alberto Basalo",
@@ -19,6 +19,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "helmet": "^3.9.0",
     "jsonwebtoken": "^8.1.0"
   }
 }
