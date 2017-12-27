@@ -5,6 +5,12 @@ const app = express();
 
 app.use(helmet());
 
+process.on("uncaughtException", err => {
+  logger.warn("uncaughtException");
+  logger.error(err);
+  process.exit(1);
+});
+
 configureMiddleware(app);
 configureApi(app);
 

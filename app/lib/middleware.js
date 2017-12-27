@@ -26,11 +26,13 @@ module.exports.useMiddleware = function(app) {
   }
   function configureErrorHandler() {
     app.use((err, req, res, next) => {
-      console.error(
-        `err: ${err.message}  ${req.method} : ${req.url} - ${body}`
-      );
-      console.info(err);
-      res.status(500).json(err);
+      if (!err) next();
+      logger.error(err);
+      res.status(err.status || 500).send({
+        method: req.method,
+        url: req.url,
+        message: err.message
+      });
     });
   }
 };
