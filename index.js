@@ -6,8 +6,8 @@ const app = express();
 app.use(helmet());
 
 process.on("uncaughtException", err => {
-  logger.warn("uncaughtException");
-  logger.error(err);
+  console.warn("uncaughtException");
+  console.error(err);
   process.exit(1);
 });
 
