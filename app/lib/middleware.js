@@ -11,7 +11,11 @@ module.exports.useMiddleware = function(app) {
     next();
   });
   security.useSecurity(app, securedRoutes);
-
+  app.use((err, req, res, next) => {
+    console.error(`err: ${err.message}  ${req.method} : ${req.url} - ${body}`);
+    console.info(err);
+    res.render("error", { err });
+  });
   function configureBodyParser() {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());

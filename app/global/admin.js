@@ -6,6 +6,6 @@ module.exports = (app, url) => {
       platform: process.platform,
       arch: process.arch
     };
-    res.json(processInfo);
+    res.json(process);
   });
 };
