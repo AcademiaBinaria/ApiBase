@@ -1,6 +1,11 @@
 module.exports = (app, url) => {
   // api/priv/admin
   app.route(url).get((req, res) => {
-    res.json(process);
+    const processInfo = {
+      env: process.env,
+      platform: process.platform,
+      arch: process.arch
+    };
+    res.json(processInfo);
   });
 };
