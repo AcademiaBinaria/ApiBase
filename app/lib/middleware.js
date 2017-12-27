@@ -27,7 +27,7 @@ module.exports.useMiddleware = function(app) {
   function configureErrorHandler() {
     app.use((err, req, res, next) => {
       if (!err) next();
-      logger.error(err);
+      console.error(err);
       res.status(err.status || 500).send({
         method: req.method,
         url: req.url,
