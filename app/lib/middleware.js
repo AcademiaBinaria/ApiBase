@@ -6,22 +6,31 @@ module.exports.useMiddleware = function(app) {
 
   app.use(cors());
   configureBodyParser();
-  app.use((req, res, next) => {
-    logEveryRequest(req);
-    next();
-  });
+  configureErrorHandler();
+  configureLog();
   security.useSecurity(app, securedRoutes);
-  app.use((err, req, res, next) => {
-    console.error(`err: ${err.message}  ${req.method} : ${req.url} - ${body}`);
-    console.info(err);
-    res.status(500).json(err);
-  });
+
   function configureBodyParser() {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
   }
+  function configureLog() {
+    app.use((req, res, next) => {
+      logEveryRequest(req);
+      next();
+    });
+  }
   function logEveryRequest(req) {
     const body = JSON.stringify(req.body);
     console.log(`${req.method} : ${req.url} - ${body}`);
+  }
+  function configureErrorHandler() {
+    app.use((err, req, res, next) => {
+      console.error(
+        `err: ${err.message}  ${req.method} : ${req.url} - ${body}`
+      );
+      console.info(err);
+      res.status(500).json(err);
+    });
   }
 };
