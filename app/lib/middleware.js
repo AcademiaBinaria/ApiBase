@@ -14,7 +14,7 @@ module.exports.useMiddleware = function(app) {
   app.use((err, req, res, next) => {
     console.error(`err: ${err.message}  ${req.method} : ${req.url} - ${body}`);
     console.info(err);
-    res.render("error", { err });
+    res.status(500).json(err);
   });
   function configureBodyParser() {
     app.use(bodyParser.urlencoded({ extended: true }));
