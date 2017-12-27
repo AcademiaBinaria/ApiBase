@@ -8,4 +8,7 @@ module.exports = (app, url) => {
     };
     res.json(processInfo);
   });
+  app.route(`${url}/error`).get((req, res) => {
+    throw new Error("An error inside");
+  });
 };
