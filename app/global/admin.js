@@ -8,7 +8,6 @@ module.exports = (app, url) => {
       version: packageJSON.version,
       env: {
         dyno: process.env.DYNO,
-        path: process.env.PATH,
         port: process.env.PORT
       },
       platform: process.platform,
