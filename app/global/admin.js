@@ -4,7 +4,7 @@ module.exports = (app, url) => {
   // api/pub/admin
   app.route(url).get((req, res) => {
     const processInfo = {
-      message: "test",
+      message: "Hola Escuela IT",
       version: packageJSON.version,
       env: {
         dyno: process.env.DYNO,
