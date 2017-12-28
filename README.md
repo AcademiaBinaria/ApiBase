@@ -1,6 +1,6 @@
-# ApiBase
+# App on Heroku
 
-API base tutorial
+Heroku tutorial
 
 [api-base.herokuapp.com](https://api-base.herokuapp.com/api/pub/admin)
 
