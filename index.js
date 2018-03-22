@@ -23,5 +23,5 @@ function configureMiddleware(app) {
 }
 
 function configureApi(app) {
-  require("./app/global/api.routing")(app);
+  require("./app/routes/api.routing")(app);
 }

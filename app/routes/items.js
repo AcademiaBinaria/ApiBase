@@ -1,6 +1,4 @@
-let items = [];
-
-module.exports = (app, url) => {
+module.exports = (app, url, items) => {
   // api/pub/items
   app
     .route(url)

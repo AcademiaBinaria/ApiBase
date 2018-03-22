@@ -1,6 +1,4 @@
-let operations = [];
-
-module.exports = (app, url) => {
+module.exports = (app, url, operations) => {
   // api/priv/operations
   app
     .route(url)
