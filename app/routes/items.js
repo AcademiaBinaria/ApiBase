@@ -4,11 +4,11 @@ module.exports = (app, url, items) => {
     .route(url)
     .get((req, res) => {
       if (items && items.length > 0) res.json(items);
-      else res.status(204).send();
+      else res.status(204).json([]);
     })
     .post((req, res) => {
       const item = req.body;
-      item._id = new Date().getTime().toString();
+      item._id = item._id ? item._id : new Date().getTime().toString();
       items.push(item);
       res.status(201).json(item);
     })

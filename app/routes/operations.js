@@ -12,7 +12,7 @@ module.exports = (app, url, operations) => {
     })
     .post((req, res) => {
       const operation = req.body;
-      operation._id = new Date().getTime().toString();
+      operation._id = operation._id ? operation._id : new Date().getTime().toString();
       operation.owner = req.email;
       operations.push(operation);
       res.status(201).json(operation);
