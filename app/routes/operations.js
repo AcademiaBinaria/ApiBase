@@ -12,7 +12,9 @@ module.exports = (app, url, operations) => {
     })
     .post((req, res) => {
       const operation = req.body;
-      operation._id = operation._id ? operation._id : new Date().getTime().toString();
+      operation._id = operation._id
+        ? operation._id
+        : new Date().getTime().toString();
       operation.owner = req.email;
       operations.push(operation);
       res.status(201).json(operation);
@@ -57,19 +59,23 @@ module.exports = (app, url, operations) => {
       }
     });
   // // api/priv/operations/2018/04
-  app
-    .route(`${url}/:year/:month`)
-    .get((req, res) => {
-      const index = getIndexByOwnerYearMonth(req.email, req.params.year, req.params.month);
-      if (index >= 0) {
-        res.json(operations[index]);
-      } else {
-        res.status(404).send();
-      }
-    });
+  app.route(`${url}/:year/:month`).get((req, res) => {
+    const userOperations = getIndexByOwnerYearMonth(
+      req.email,
+      req.params.year,
+      req.params.month
+    );
+    if (userOperations && userOperations.length > 0) {
+      res.json(userOperations);
+    } else {
+      res.status(404).send();
+    }
+  });
 
   const getIndexByOwnerId = (owner, id) =>
     operations.findIndex(i => i.owner == owner && i._id == id);
   const getIndexByOwnerYearMonth = (owner, year, month) =>
-    operations.findIndex(i => i.owner == owner && i.year == year && i.month == month);
+    operations.filter(
+      i => i.owner == owner && i.year == year && i.month == month
+    );
 };
