@@ -56,7 +56,20 @@ module.exports = (app, url, operations) => {
         res.status(404).send();
       }
     });
+  // // api/priv/operations/2018/04
+  app
+    .route(`${url}/:year/:month`)
+    .get((req, res) => {
+      const index = getIndexByOwnerYearMonth(req.email, req.params.year, req.params.month);
+      if (index >= 0) {
+        res.json(operations[index]);
+      } else {
+        res.status(404).send();
+      }
+    });
 
-  var getIndexByOwnerId = (owner, id) =>
+  const getIndexByOwnerId = (owner, id) =>
     operations.findIndex(i => i.owner == owner && i._id == id);
+  const getIndexByOwnerYearMonth = (owner, year, month) =>
+    operations.findIndex(i => i.owner == owner && i.year == year && i.month == month);
 };
