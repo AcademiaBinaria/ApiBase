@@ -2,6 +2,7 @@ const admin = require("./admin.js");
 const register = require("./register.js");
 const login = require("./login.js");
 const items = require("./items.js");
+const categories = require("./categories.js");
 const operations = require("./operations.js");
 
 module.exports = app => {
@@ -9,6 +10,7 @@ module.exports = app => {
   register(app, "/api/pub/credentials/registration");
   login(app, "/api/pub/credentials/login");
   items(app, "/api/pub/items", []);
+  categories(app, "/api/pub/categories");
   operations(app, "/api/priv/operations", []);
   items(app, "/api/pub/journalentries", []);
   items(app, "/api/pub/monthbalances", []);
