@@ -7,13 +7,14 @@ const operations = require("./operations.js");
 
 module.exports = app => {
   admin(app, "/api/pub/admin");
-  register(app, "/api/pub/credentials/registration");
-  login(app, "/api/pub/credentials/login");
-  items(app, "/api/pub/items", []);
   categories(app, "/api/pub/categories");
-  operations(app, "/api/priv/operations", []);
+  items(app, "/api/pub/items", []);
   items(app, "/api/pub/journalentries", []);
   items(app, "/api/pub/monthbalances", []);
+  login(app, "/api/pub/credentials/login");
   operations(app, "/api/priv/journalentries", []);
   operations(app, "/api/priv/monthbalances", []);
+  operations(app, "/api/priv/operations", []);
+  operations(app, "/api/priv/travels", []);
+  register(app, "/api/pub/credentials/registration");
 };
