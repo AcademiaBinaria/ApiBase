@@ -29,11 +29,11 @@ module.exports = (app, url) => {
   app.route(url).get((req, res) => {
     res.json(categories);
   });
-  // // api/priv/categories/count
+  // api/pub/categories/count
   app.route(`${url}/count`).get((req, res) => {
     res.json({ count: categories.length });
   });
-  // // api/pub/categories/months ..."entry_kinds", "expense_categories"
+  // api/pub/categories/months ..."entry_kinds", "expense_categories"
   app.route(`${url}/:id`).get((req, res) => {
     switch (req.params.id) {
       case 'months':

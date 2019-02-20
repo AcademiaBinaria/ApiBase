@@ -1,4 +1,4 @@
-export function useMiddleware(app) {
+module.exports.useMiddleware = function(app) {
   const cors = require('cors');
   const bodyParser = require('body-parser');
   const security = require('./security.js');
@@ -35,4 +35,4 @@ export function useMiddleware(app) {
       });
     });
   }
-}
+};
