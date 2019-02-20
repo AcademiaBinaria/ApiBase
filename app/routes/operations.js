@@ -12,9 +12,7 @@ module.exports = (app, url, operations) => {
     })
     .post((req, res) => {
       const operation = req.body;
-      operation._id = operation._id
-        ? operation._id
-        : new Date().getTime().toString();
+      operation._id = operation._id ? operation._id : new Date().getTime().toString();
       operation.owner = req.email;
       operations.push(operation);
       res.status(201).json(operation);
@@ -23,28 +21,28 @@ module.exports = (app, url, operations) => {
       operations = [];
       res.status(204).send();
     });
-  // // api/priv/operations/count
+  // api/priv/operations/count
   app.route(`${url}/count`).get((req, res) => {
     const userOperations = operations.filter(i => i.owner == req.email);
     const count = userOperations ? userOperations.length : 0;
     res.json({ count: count });
   });
-  // // api/priv/operations/314
+  // api/priv/operations/314
   app
     .route(`${url}/:id`)
     .get((req, res) => {
-      const index = getIndexByOwnerId(req.email, req.params.id);
-      if (index >= 0) {
-        res.json(operations[index]);
+      const operation = getOperationByOwnerId(req.email, req.params.id);
+      if (operation) {
+        res.json(operation);
       } else {
         res.status(404).send();
       }
     })
     .put((req, res) => {
-      const index = getIndexByOwnerId(req.email, req.params.id);
-      if (index >= 0) {
-        operations[index] = req.body;
-        res.json(operations[index]);
+      const operation = getOperationByOwnerId(req.email, req.params.id);
+      if (operation) {
+        operation = req.body;
+        res.json(operation);
       } else {
         res.status(404).send();
       }
@@ -60,7 +58,7 @@ module.exports = (app, url, operations) => {
     });
   // // api/priv/operations/2018/04
   app.route(`${url}/:year/:month`).get((req, res) => {
-    const userOperations = getIndexByOwnerYearMonth(
+    const userOperations = getOperationsByOwnerYearMonth(
       req.email,
       req.params.year,
       req.params.month
@@ -74,8 +72,8 @@ module.exports = (app, url, operations) => {
 
   const getIndexByOwnerId = (owner, id) =>
     operations.findIndex(i => i.owner == owner && i._id == id);
-  const getIndexByOwnerYearMonth = (owner, year, month) =>
-    operations.filter(
-      i => i.owner == owner && i.year == year && i.month == month
-    );
+  const getOperationByOwnerId = (owner, id) =>
+    operations.find(i => i.owner == owner && i._id == id);
+  const getOperationsByOwnerYearMonth = (owner, year, month) =>
+    operations.filter(i => i.owner == owner && i.year == year && i.month == month);
 };

@@ -1,4 +1,4 @@
-const security = require("./../lib/security.js");
+const security = require('./../lib/security.js');
 module.exports = (app, url) => {
   app.route(url).post((req, res) => register(req, res));
 };

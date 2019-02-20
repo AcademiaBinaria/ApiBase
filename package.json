@@ -13,7 +13,8 @@
     "type": "git"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -23,6 +24,7 @@
     "jsonwebtoken": "^8.4.0"
   },
   "devDependencies": {
-    "eslint": "^5.14.1"
+    "eslint": "^5.14.1",
+    "eslint-plugin-prettier": "^3.0.1"
   }
 }

@@ -1,18 +1,19 @@
-const packageJSON = require("../../package.json");
+const packageJSON = require('../../package.json');
 
 module.exports = (app, url) => {
   // api/pub/admin
   app.route(url).get((req, res) => {
     const processInfo = {
-      message: "Hola Academia Binaria",
+      message: 'Hola Academia Binaria',
       version: packageJSON.version,
       env: {
         dyno: process.env.DYNO,
-        port: process.env.PORT
+        port: process.env.PORT,
       },
       platform: process.platform,
-      arch: process.arch
+      arch: process.arch,
     };
+    console.log('process:', processInfo);
     res.json(processInfo);
   });
   app.route(`${url}/error`).get((req, res) => {

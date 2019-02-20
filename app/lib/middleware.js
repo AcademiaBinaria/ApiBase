@@ -1,8 +1,8 @@
-module.exports.useMiddleware = function(app) {
-  const cors = require("cors");
-  const bodyParser = require("body-parser");
-  const security = require("./security.js");
-  const securedRoutes = "/api/priv/";
+export function useMiddleware(app) {
+  const cors = require('cors');
+  const bodyParser = require('body-parser');
+  const security = require('./security.js');
+  const securedRoutes = '/api/priv/';
 
   app.use(cors());
   configureBodyParser();
@@ -31,8 +31,8 @@ module.exports.useMiddleware = function(app) {
       res.status(err.status || 500).send({
         method: req.method,
         url: req.url,
-        message: err.message
+        message: err.message,
       });
     });
   }
-};
+}

@@ -1,27 +1,25 @@
-const EMAIL = process.env.EMAIL || "admin@api-base.com";
-const PASSWORD = process.env.PASSWORD || "1234";
+const EMAIL = process.env.EMAIL || 'admin@api-base.com';
+const PASSWORD = process.env.PASSWORD || '1234';
 const users = [{ email: EMAIL, password: PASSWORD }];
-const jwt = require("./jwt");
+const jwt = require('./jwt');
 
 module.exports = {
-  useSecurity: useSecurity,
+  useSecurity: (app, url) => app.use(url, checkCredentials),
   userExists: user => users.some(u => u.email == user.email),
   saveUser: user => users.push(user),
   isValidUser: user => users.filter(u => checkUsers(user, u))[0],
-  getNewToken: user => jwt.createToken(user)
+  getNewToken: user => jwt.createToken(user),
 };
 
-function useSecurity(app, url) {
-  app.use(url, (req, res, next) => {
-    try {
-      const user = getUser(req);
-      singRequest(req, user);
-      next();
-    } catch (err) {
-      console.error(err.message);
-      sendInvalidCredentialsMessage(res);
-    }
-  });
+function checkCredentials(req, res, next) {
+  try {
+    const user = getUser(req);
+    singRequest(req, user);
+    next();
+  } catch (err) {
+    console.error(err.message);
+    sendInvalidCredentialsMessage(res);
+  }
 }
 
 function singRequest(req, user) {
@@ -29,7 +27,7 @@ function singRequest(req, user) {
 }
 
 function sendInvalidCredentialsMessage(res) {
-  res.status(401).send("Invalid credentials");
+  res.status(401).send('Invalid credentials');
 }
 
 function getUser(req) {
@@ -39,8 +37,8 @@ function getUser(req) {
 }
 
 function getAuthorizationToken(req) {
-  const authorization = req.get("Authorization");
-  const chunks = authorization.split(" ");
+  const authorization = req.get('Authorization');
+  const chunks = authorization.split(' ');
   return chunks[1];
 }
 

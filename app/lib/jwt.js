@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const SECRET = process.env.SECRET || "http://academia-binaria.com";
+const jwt = require('jsonwebtoken');
+const SECRET = process.env.SECRET || 'http://academia-binaria.com';
 const session_seconds = 60 * 60;
 const expiration = { expiresIn: session_seconds };
 
@@ -9,6 +9,4 @@ exports.createToken = function(user) {
   return { token };
 };
 
-exports.verifyToken = function(token) {
-  return jwt.verify(token, SECRET);
-};
+exports.verifyToken = token => jwt.verify(token, SECRET);

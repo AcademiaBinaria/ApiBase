@@ -16,23 +16,23 @@ module.exports = (app, url, items) => {
       items = [];
       res.status(204).send();
     });
-  // // api/priv/items/count
+  // api/pub/items/count
   app.route(`${url}/count`).get((req, res) => {
     res.json({ count: items.length });
   });
-  // // api/pub/items/314
+  // api/pub/items/314
   app
     .route(`${url}/:id`)
     .get((req, res) => {
-      const index = getIndexById(req.params.id);
-      if (index >= 0) res.json(items[index]);
+      const item = getItemById(req.params.id);
+      if (item) res.json(item);
       else res.status(404).send();
     })
     .put((req, res) => {
-      const index = getIndexById(req.params.id);
-      if (index >= 0) {
-        items[index] = req.body;
-        res.json(items[index]);
+      const item = getItemById(req.params.id);
+      if (item) {
+        item = req.body;
+        res.json(item);
       } else {
         res.status(404).send();
       }
@@ -47,5 +47,6 @@ module.exports = (app, url, items) => {
       }
     });
 
-  var getIndexById = id => items.findIndex(i => i._id == id);
+  const getIndexById = id => items.findIndex(i => i._id == id);
+  const getItemById = id => items.find(i => i._id == id);
 };

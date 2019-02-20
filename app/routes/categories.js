@@ -1,29 +1,29 @@
 module.exports = (app, url) => {
-  const categories = ["months", "entry_kinds", "expense_categories"];
+  const categories = ['months', 'entry_kinds', 'expense_categories'];
   const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
   const entryKinds = {
-    I: "Income",
-    O: "Outgoing",
-    E: "Expense"
+    I: 'Income',
+    O: 'Outgoing',
+    E: 'Expense',
   };
   const expenseCategories = {
-    G: "General",
-    C: "Culture",
-    L: "Leisure",
-    E: "Extras"
+    G: 'General',
+    C: 'Culture',
+    L: 'Leisure',
+    E: 'Extras',
   };
   // api/pub/categories
   app.route(url).get((req, res) => {
@@ -36,13 +36,13 @@ module.exports = (app, url) => {
   // // api/pub/categories/months ..."entry_kinds", "expense_categories"
   app.route(`${url}/:id`).get((req, res) => {
     switch (req.params.id) {
-      case "months":
+      case 'months':
         res.json(months);
         break;
-      case "entry_kinds":
+      case 'entry_kinds':
         res.json(entryKinds);
         break;
-      case "expense_categories":
+      case 'expense_categories':
         res.json(expenseCategories);
         break;
       default:
