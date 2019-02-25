@@ -13,6 +13,7 @@ module.exports = app => {
   items(app, pub + 'items', []);
   items(app, pub + 'journalentries', []);
   items(app, pub + 'monthbalances', []);
+  items(app, pub + 'rates', []);
   login(app, pub + 'credentials/login');
   operations(app, priv + 'journalentries', []);
   operations(app, priv + 'monthbalances', []);
