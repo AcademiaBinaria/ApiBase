@@ -9,13 +9,13 @@ Heroku tutorial
 * Application = Source code + NPM dependencies + Procfile
 * Procfile : `web: node index.js`
 * Slug : Application + Node runtime
-* Release : Slug + Config vars + Add-ons
+* Release : Slug + Config variables + Add-ons
 * Dyno: Unix container para ejecutar la aplicación
 
 ## Paso a paso
 
 * 0 Tener un app en Node ;-)
-* 1 Crear una cuenta en [heroku](heroku.com)
+* 1 Crear una cuenta en [Heroku](heroku.com)
 * 2 Crear una nueva app
   * Nombre
   * Región
@@ -29,6 +29,27 @@ Heroku tutorial
   * More > View Logs
 * 6 Settings -> Config Variables
 * 7 Settings -> Custom Domain \*.tudominio.com
-* 8 Add Ons **VISA**
+* 8 Add On **VISA**
   * Log: _logentries_
   * Monitor: _librato_
+
+## Funcionalidad
+
+### Público
+
+* admin
+* categories / months / kinds / expenseCategories
+* items
+* journalentries
+* monthbalances
+* _credentials_
+
+### Privado
+
+* operations
+* travels
+* _tasks_
+
+_7-watch_
+
+

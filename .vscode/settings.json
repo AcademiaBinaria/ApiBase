@@ -1,3 +1,12 @@
 {
-  "workbench.colorTheme": "Winter is Coming (Dark Blue)"
+  "workbench.colorTheme": "Winter is Coming (Dark Blue)",
+  "spellright.language": [
+    "en",
+    "es"
+  ],
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext"
+  ]
 }

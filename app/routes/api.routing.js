@@ -12,7 +12,8 @@ module.exports = app => {
   categories(app, pub + 'categories');
   items(app, pub + 'items', []);
   items(app, pub + 'journalentries', []);
-  items(app, pub + 'monthbalances', []);
+  items( app, pub + 'monthbalances', [] );
+  items(app, pub + 'projects', []);
   items(app, pub + 'rates', []);
   login(app, pub + 'credentials/login');
   operations(app, priv + 'journalentries', []);
