@@ -12,7 +12,7 @@ module.exports = (app, url) => {
       },
       platform: process.platform,
       arch: process.arch,
-      useragent: req.useragent,
+      useragent: req.get('User-Agent'),
       address: req.header('x-forwarded-for') || req.connection.remoteAddress,
     };
     console.log('process:', processInfo);

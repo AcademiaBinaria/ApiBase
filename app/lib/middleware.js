@@ -1,12 +1,10 @@
 module.exports.useMiddleware = function(app) {
   const cors = require('cors');
   const bodyParser = require('body-parser');
-  const useragent = require('express-useragent');
   const security = require('./security.js');
   const securedRoutes = '/api/priv/';
 
   app.use(cors());
-  app.use(useragent.express());
   configureBodyParser();
   configureErrorHandler();
   configureLog();
