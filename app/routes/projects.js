@@ -39,9 +39,10 @@ module.exports = (app, url, projects) => {
       }
     })
     .put((req, res) => {
-      const project = getProjectByOwnerId(getOwner(req), req.params.id);
-      if (project) {
-        project = req.body;
+      const index = getIndexByOwnerId(getOwner(req), req.params.id);
+      if (index >= 0) {
+        const project = getProjectByOwnerId(getOwner(req), req.params.id);
+        projects[index] = { ...project, ...req.body };
         res.json(project);
       } else {
         res.status(404).send();
