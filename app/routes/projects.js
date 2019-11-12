@@ -1,5 +1,5 @@
 module.exports = (app, url, projects) => {
-  // api/pub/projets
+  // api/pub/projets | tasks
   app
     .route(url)
     .get((req, res) => {
@@ -57,11 +57,14 @@ module.exports = (app, url, projects) => {
       }
     });
 
-  const getIndexByOwnerId = (owner, id) => projects.findIndex(i => i.owner == owner && i._id == id);
-  const getProjectByOwnerId = (owner, id) => projects.find(i => i.owner == owner && i._id == id);
+  const getIndexByOwnerId = (owner, id) =>
+    projects.findIndex(i => i.owner == owner && i._id == id);
+  const getProjectByOwnerId = (owner, id) =>
+    projects.find(i => i.owner == owner && i._id == id);
   const getOwner = req => {
-    const useragent = req.get('User-Agent');
-    const address = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    const useragent = req.get("User-Agent");
+    const address =
+      req.header("x-forwarded-for") || req.connection.remoteAddress;
     const owner = useragent + address;
     return owner;
   };

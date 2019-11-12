@@ -2,6 +2,7 @@
   "name": "api-base",
   "version": "1.0.0",
   "description": "API base tutorial",
+  "homepage": "https://api-base.herokuapp.com/api/pub/hello",
   "main": "index.js",
   "author": {
     "name": "Alberto Basalo",
@@ -18,14 +19,14 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "helmet": "^3.15.1",
-    "jsonwebtoken": "^8.4.0"
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
-    "eslint": "^5.14.1",
-    "eslint-plugin-prettier": "^3.0.1"
+    "eslint": "^6.6.0",
+    "eslint-plugin-prettier": "^3.1.1"
   }
 }
