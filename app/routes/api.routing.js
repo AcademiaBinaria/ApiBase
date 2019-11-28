@@ -24,5 +24,6 @@ module.exports = app => {
   operations(app, priv + "travels", []);
   projects(app, pub + "projects", []);
   projects(app, pub + "tasks", []);
+  projects(app, pub + "transactions", []);
   register(app, pub + "credentials/registration");
 };
