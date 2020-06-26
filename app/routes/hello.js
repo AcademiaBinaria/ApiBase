@@ -4,7 +4,7 @@ module.exports = (app, url) => {
   // api/pub/hello
   app.route(url).get((req, res) => {
     const processInfo = {
-      message: "Hola Academia Binaria",
+      message: "Hola Mundo",
       version: packageJSON.version,
       useragent: req.get("User-Agent"),
       address: req.header("x-forwarded-for") || req.connection.remoteAddress
