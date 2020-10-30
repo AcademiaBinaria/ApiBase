@@ -8,7 +8,7 @@ module.exports = (app, url, items) => {
     })
     .post((req, res) => {
       const item = req.body;
-      item._id = item._id ? item._id : new Date().getTime().toString();
+      item.id = item.id ? item.id : new Date().getTime().toString();
       items.push(item);
       res.status(201).json(item);
     })
@@ -47,6 +47,6 @@ module.exports = (app, url, items) => {
       }
     });
 
-  const getIndexById = id => items.findIndex(i => i._id == id);
-  const getItemById = id => items.find(i => i._id == id);
+  const getIndexById = (id) => items.findIndex((i) => i.id == id);
+  const getItemById = (id) => items.find((i) => i.id == id);
 };

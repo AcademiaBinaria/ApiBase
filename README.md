@@ -40,6 +40,9 @@ Heroku tutorial
 * admin
 * categories / months / kinds / expenseCategories
 * items
+* projects
+* tasks
+* operations
 * journalentries
 * monthbalances
 * _credentials_
@@ -48,8 +51,6 @@ Heroku tutorial
 
 * operations
 * travels
-* _tasks_
 
-_7-watch_
 
 

@@ -1,9 +1,9 @@
 module.exports = (app, url, projects) => {
-  // api/pub/projets | tasks
+  // api/pub/projets | tasks | transactions
   app
     .route(url)
     .get((req, res) => {
-      const userProjects = projects.filter(i => i.owner == getOwner(req));
+      const userProjects = projects.filter((i) => i.owner == getOwner(req));
       if (userProjects && userProjects.length > 0) {
         res.json(userProjects);
       } else {
@@ -18,12 +18,12 @@ module.exports = (app, url, projects) => {
       res.status(201).json(project);
     })
     .delete((req, res) => {
-      projects = projects.filter(i => i.owner !== getOwner(req));
+      projects = projects.filter((i) => i.owner !== getOwner(req));
       res.status(204).send();
     });
   // api/pub/projects/count
   app.route(`${url}/count`).get((req, res) => {
-    const userProjects = projects.filter(i => i.owner == getOwner(req));
+    const userProjects = projects.filter((i) => i.owner == getOwner(req));
     const count = userProjects ? userProjects.length : 0;
     res.json({ count: count });
   });
@@ -58,15 +58,15 @@ module.exports = (app, url, projects) => {
       }
     });
 
-  const getIndexByOwnerId = (owner, id) =>
-    projects.findIndex(i => i.owner == owner && i._id == id);
-  const getProjectByOwnerId = (owner, id) =>
-    projects.find(i => i.owner == owner && i._id == id);
-  const getOwner = req => {
-    const useragent = req.get("User-Agent");
-    const address =
-      req.header("x-forwarded-for") || req.connection.remoteAddress;
+  const getIndexByOwnerId = (owner, id) => projects.findIndex((i) => i.owner == owner && i._id == id);
+  const getProjectByOwnerId = (owner, id) => projects.find((i) => i.owner == owner && i._id == id);
+  const getOwner = (req) => {
+    const useragent = req.get('User-Agent');
+    const address = req.header('x-forwarded-for') || req.connection.remoteAddress;
     const owner = useragent + address;
-    return owner;
+    const hashed = hashCode(owner);
+    return hashed;
   };
+  const hashCode = (str) =>
+    str.split('').reduce((prevHash, currVal) => ((prevHash << 5) - prevHash + currVal.charCodeAt(0)) | 0, 0);
 };
