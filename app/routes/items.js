@@ -29,7 +29,7 @@ module.exports = (app, url, items) => {
       else res.status(404).send();
     })
     .put((req, res) => {
-      const item = getItemById(req.params.id);
+      let item = getItemById(req.params.id);
       if (item) {
         item = req.body;
         res.json(item);
